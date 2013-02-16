@@ -37,5 +37,5 @@
 @endsection
 
 @section('account')
-Jason Myrdin
+Nynaeve Storm
 @endsection

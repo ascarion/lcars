@@ -37,16 +37,37 @@ Route::any('phpinfo', function(){
 });
 
 
-Route::any('login', array('as' => 'login', function() {
+Route::get('login', array('as' => 'login', function() {
 	return View::make('login')
 		->with('title', 'Login');
 }));
 
-Route::get('/', function()
+Route::post('login', function() {
+	$userdata = array(
+		'username' => Input::get('iSpieler'),
+		'password' => Input::get('iPassword'));
+	if(Auth::attempt($userdata)) {
+		return Redirect::to('/');
+	} else {
+		echo "Login gescheitert.";
+		var_dump($userdata);
+		return Redirect::to('login')
+			->with('login_errors', true);
+	}
+});
+
+Route::get('logout', array('as' => 'logout', function() {
+	Auth::logout();
+	return Redirect::to('/');
+}));
+
+Route::get('/', array('before' => 'auth', function()
 {
 	return View::make('default')
 		->with('title', 'Default-Seite');
-});
+}));
+
+Route::controller('spieler');
 
 
 /*
@@ -107,8 +128,10 @@ Route::filter('before', function()
 	Asset::add('jquery', 'js/jquery-1.9.1.js');
 	Asset::add('general', 'css/general.css');
 	Asset::container('bootstrap')->add('css', 'css/bootstrap.css');
-	Asset::container('bootstrap')->add('responsive', 'css/boostrap-responsive.min.css');
-	Asset::container('bootstrap')->add('js', 'js/boostrap.js');
+	Asset::container('bootstrap')->add('responsive', 'css/bootstrap-responsive.min.css');
+	Asset::container('bootstrap')->add('js', 'js/bootstrap.js');
+
+
 	// Do stuff before every request to your application...
 });
 

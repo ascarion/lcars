@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 	<meta charset="utf-8">
-	<title> LCARS - {{ $title }}</title>
+	<title>LCARS - {{ $title }}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{{ Asset::styles(); }}
 	{{ Asset::container('bootstrap')->styles(); }}
@@ -16,15 +16,25 @@
 				{{ HTML::link('/', 'LCARS', array('class' => 'brand')) }}
 				<ul class="nav">
 					@section('topnav')
-					<li><a href="#">Spieler</a></li>
+					<li>{{ HTML::link_to_action('spieler@index', 'Spieler')}}</li>
 					<li><a href="#">Charaktere</a></li>
 					<li><a href="#">Komponenten</a></li>
 					<li><a href="#">Sternenkarte</a></li>
-					<li><a href="#">Administration</a></li>
 					@yield_section
 				</ul>
 				<ul class="nav pull-right">
-					<li><a href="#">@yield('account')</a></li>
+						<li><a href="http://stardate.trekzone.de"><i class="icon-star icon-white"></i> {{ Datum::createFromTimestamp()->toInplay()->toSternzeit()->getSternzeit() }}</a></li>
+					@if(!is_null(Auth::user()))
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->name }} <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								@yield('topnav_user')
+								<li>{{ HTML::link_to_route('logout', 'Abmelden') }}</li>
+							</ul>
+						</li>	
+					@else
+						<li>{{ HTML::link_to_route('login', 'Login') }}</li>	
+					@endif
 				</ul>
 			</div>
 		</div>

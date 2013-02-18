@@ -8,6 +8,7 @@
 
 class Spieler extends Eloquent {
 	public static $table = "spieler";
+	public static $per_page = 15;
 
 	public function charaktere() {
 		return $this->has_many('Charakter');

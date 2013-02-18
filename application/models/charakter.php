@@ -19,4 +19,8 @@ class Charakter extends Eloquent {
 	public function position() {
 		return $this->belongs_to('Position', 'positionen_id');
 	}
+
+	public function notizen() {
+		return $this->has_many('Notiz', 'charaktere_id');
+	}
 }

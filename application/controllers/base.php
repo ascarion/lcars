@@ -2,6 +2,10 @@
 
 class Base_Controller extends Controller {
 
+	public function __construct() {
+				$this->filter('before', 'auth');
+	}
+
 	/**
 	 * Catch-all method for requests that can't be matched.
 	 *

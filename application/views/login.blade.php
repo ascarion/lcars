@@ -26,13 +26,13 @@
 			<div class="row">
 				<div class="login-form">
 					<h2>Login</h2>
-					<form action="" >
+					{{ Form::open('login') }}
 						<fieldset>
 							<div class="control-group">
 								<div class="controls">
 									<div class="input-prepend">
 										<span class="add-on"><i class="icon-user"></i></span>
-										<input type="text" placeholder="Spieler" id="iSpieler">
+										<input type="text" placeholder="Spieler" name="iSpieler">
 									</div>
 								</div>
 							</div>
@@ -40,17 +40,16 @@
 								<div class="controls">
 									<div class="input-prepend">
 										<span class="add-on"><i class="icon-lock"></i></span>
-										<input type="password" placeholder="Passwort" id="iPassword">
+										<input type="password" placeholder="Passwort" name="iPassword">
 									</div>
 								</div>
 							</div>
-							<div class="control-group">
-								<div class="controls">
-									<label>
-										<input type="checkbox" id="iCookie"> Angemeldet bleiben
-									</label>
-								</div>
-							</div>
+								@if(Session::has('login_errors')) 
+									<div class="alert alert-error">
+										<button type="button" class="close" data-dismiss="alert">&times;</button>
+										Login-Daten fehlerhaft.
+									</div>
+								@endif
 							<div class="control-group">
 								<div class="controls">
 									<button class="btn btn-primary" type="submit">Anmelden</button>
@@ -58,7 +57,7 @@
 							</div>
 							{{ HTML::link('forgot-password', 'Passwort vergessen')}}
 						</fieldset>
-					</form>
+					{{ Form::close() }}
 				</div>
 			</div>
 		</div>

@@ -60,6 +60,10 @@ Laravel\Autoloader::$aliases = $aliases;
 
 Autoloader::map(array(
 	'Base_Controller' => path('app').'controllers/base.php',
+	'DatumsUmwandler' => path('app').'libraries/sternzeit.class.php',
+	'Datum'  => path('app').'libraries/sternzeit.class.php',
+	'Sternzeit'  => path('app').'libraries/sternzeit.class.php',
+	'DatumsFabrik' => path('app').'libraries/sternzeit.class.php',
 ));
 
 /*

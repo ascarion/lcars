@@ -7,9 +7,10 @@
 
 class Position extends Eloquent {
 	public static $table = "positionen";
+	public $includes = array('komponente');
 
 	public function komponente() {
-		retun $this->belongs_to('Komponente', 'komponenten_id');
+		return $this->belongs_to('Komponente', 'komponenten_id');
 	}
 
 	public function charakter() {

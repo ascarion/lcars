@@ -34,3 +34,28 @@ html, body {
 #content {
 	margin-top: 40px;
 }
+
+.annotation {
+	margin-top: 5px;
+	font-size: smaller;
+	font-color: 666;
+	font-style: italic;
+}
+
+.pinlabel {
+	margin-right: 5px;
+}
+
+.pagination {
+    a.previous_page,span.previous_page {
+        border-left: 1px solid #ddd;
+    }
+    span {
+        float: left;
+        padding: 0 14px;
+        line-height: (@baseLineHeight * 2) - 2;
+        text-decoration: none;
+        border: 1px solid #ddd;
+        border-left-width: 0;
+    }
+}

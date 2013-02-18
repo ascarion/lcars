@@ -29,6 +29,9 @@
 							<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ Auth::user()->name }} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								@yield('topnav_user')
+								<li>{{ HTML::link_to_action('spieler@profil', 'Spielerprofil', array(Auth::user()->id)) }}</li>
+								<li><a href="#">Passwort &amp; Email ändern</a></li>
+								<li class="divider"></li>
 								<li>{{ HTML::link_to_route('logout', 'Abmelden') }}</li>
 							</ul>
 						</li>	

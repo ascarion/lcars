@@ -3,12 +3,12 @@
 @section('content')
 	<header>
 	<h1>Hello World</h1>
-	<p class="lead">Dies ist die Default-Test-Seite der <strong>P</strong>ersonal<strong>a</strong>dministrations<strong>d</strong>auer<strong>d</strong>atenbank.</p>
+	<p class="lead">Default-Test-Seite</p>
 	</header>
 
 
 	<section id="eins">
-	<h1>Lorem Impsum</h1>
+	<h2>Absatz 1</h2>
 	
 	<p>Sed laoreet luctus blandit. Maecenas iaculis vestibulum faucibus. Fusce adipiscing urna id metus eleifend pharetra. Maecenas ac erat vel lorem tempus aliquam ut vitae risus. Aenean eu risus nec libero rutrum venenatis. Vestibulum condimentum viverra nisl, et gravida ipsum tempus sed. Vivamus non ipsum sed ligula eleifend lobortis nec sed massa. Aenean in ipsum augue, ac tincidunt dolor. Nunc posuere, neque sit amet condimentum porta, nisl nisi ultricies tellus, suscipit porttitor urna ligula aliquam leo. Praesent euismod feugiat ante, vitae rhoncus libero condimentum ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
 
@@ -22,7 +22,7 @@
 	</section>
 
 	<section id="zwei">
-		<h1>Forms</h1>
+		<h2>Absatz 2</h2>
 
 	<p>Sed laoreet luctus blandit. Maecenas iaculis vestibulum faucibus. Fusce adipiscing urna id metus eleifend pharetra. Maecenas ac erat vel lorem tempus aliquam ut vitae risus. Aenean eu risus nec libero rutrum venenatis. Vestibulum condimentum viverra nisl, et gravida ipsum tempus sed. Vivamus non ipsum sed ligula eleifend lobortis nec sed massa. Aenean in ipsum augue, ac tincidunt dolor. Nunc posuere, neque sit amet condimentum porta, nisl nisi ultricies tellus, suscipit porttitor urna ligula aliquam leo. Praesent euismod feugiat ante, vitae rhoncus libero condimentum ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
 

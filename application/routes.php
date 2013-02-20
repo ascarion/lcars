@@ -36,6 +36,10 @@ Route::any('phpinfo', function(){
 	return phpinfo();
 });
 
+Route::any('password/(:any)', function($pw) {
+	return Hash::make($pw);
+});
+
 
 Route::get('login', array('as' => 'login', function() {
 	return View::make('login')

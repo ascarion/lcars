@@ -22,7 +22,7 @@
 		@foreach($spieler->results as $sp)
 			<tr>
 				<td>{{$sp->id}}</td>
-				<td>{{ HTML::link_to_action('spieler@profil', $sp->name, array($sp->id))}}</td>
+				<td>{{ HTML::link_to_action('spieler@profil', $sp->name, array($sp->id)) }}</td>
 				<td>{{$sp->email}}</td>
 				<td>
 					@if($sp->aktiv)

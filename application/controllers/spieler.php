@@ -6,10 +6,10 @@ class Spieler_Controller extends Base_Controller {
 		return Redirect::to_action('spieler@liste');
 	}
 
-	public function action_profil($id = 0) {
+	public function action_profil($id) {
 		$spieler = Spieler::find($id);
-
-		if(!is_numeric($id) || $id == 0 || is_null($spieler)) {
+		
+		if($id == 0 || is_null($spieler)) {
 			return Response::error('404');
 		}
 
@@ -32,8 +32,8 @@ class Spieler_Controller extends Base_Controller {
 		}
 
 		$notizen['Eigene Beiträge'] = Notiz::with(array('charakter', 'autor', 'editierer'))
-			->where('eintragende_id', '=', $id)
-			->or_where('aendernde_id', '=', $id)->order_by('updated_at', 'desc')->get();
+			->where('eintragende_id', '=', $spieler->id)
+			->or_where('aendernde_id', '=', $spieler->id)->order_by('updated_at', 'desc')->get();
 
 		return View::make('spieler.profil')
 			->with('title', "Profil - " . $spieler->name)

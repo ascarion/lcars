@@ -40,12 +40,12 @@
 			</td>
 		</tr>
 		<tr>
-			<th>Letztes Update</th>
-			<td>{{ Schnipsel::datumsformat($spieler->updated_at) }}</td>
-		</tr>
-		<tr>
 			<th>Erstellt</th>
 			<td>{{ Schnipsel::datumsformat($spieler->created_at) }}</td>
+		</tr>
+		<tr>
+			<th>Letztes Update</th>
+			<td>{{ Schnipsel::datumsformat($spieler->updated_at) }}</td>
 		</tr>
 		<tr>
 			<th>Admin</th>
@@ -85,7 +85,7 @@
 		<tbody>
 		@foreach($charaktere as $charakter) 
 			<tr>
-				<td>{{ $charakter->name }}</td>
+				<td>{{ HTML::link_to_action('charakter@profil', $charakter->name, array($charakter->id)) }}</td>
 				<td>{{ $charakter->rang->name }}</td>
 				<td>{{ $charakter->position->name }}</td>
 				<td>{{ $charakter->position->komponente->name }}</td>
@@ -125,7 +125,7 @@
 	<div class="tab-content">
 		@foreach($notizen as $name => $notiz)
 			@if($name == $charaktere[0]->name)
-				<div class="tab-pane active" id="{{ Str:: slug($name) }}">
+				<div class="tab-pane active" id="{{ Str::slug($name) }}">
 			@else
 				<div class="tab-pane" id="{{ Str:: slug($name) }}">
 			@endif
@@ -140,10 +140,10 @@
 							{{ Schnipsel::pinlabel('missionspins', $n->missionspins) }}
 							<div>{{ $n->text }}</div>
 							<div class="annotation">
-								{{ HTML::link_to_action('spieler@profil', $n->autor->name, array($n->autor->id)) }} am {{ Schnipsel::datumsformat($n->created_at) }}. 
 								@if($name == 'Eigene Beiträge') 
-									In {{ $n->charakter->name }}.
-								@endif								
+									({{ $n->charakter->name }}) 
+								@endif
+								{{ HTML::link_to_action('spieler@profil', $n->autor->name, array($n->autor->id)) }} am {{ Schnipsel::datumsformat($n->created_at) }}. 
 								@if($n->created_at != $n->updated_at)
 									Zuletzt bearbeitet
 										@if($n->autor->id != $n->editierer->id)

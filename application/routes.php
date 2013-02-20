@@ -68,6 +68,7 @@ Route::get('/', array('before' => 'auth', function()
 }));
 
 Route::controller('spieler');
+Route::controller('charakter');
 
 
 /*

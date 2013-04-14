@@ -363,7 +363,7 @@ class Datum {
      * @return String
      */
     public function __toString () {
-        return $this->format("D j. M Y H:i:s");
+        return $this->format("D j. F Y H:i:s");
 
     }
 

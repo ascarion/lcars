@@ -1,0 +1,48 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<h1>Charaktere</h1>
+
+<p>Die Datenbank enthält <strong><?php echo  $no ; ?></strong> Charaktere.</p>
+
+
+<?php echo  $charaktere->links() ; ?>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Rang</th>
+			<th>Position</th>
+			<th>Komponente</th>
+			<th>Status</th>
+		</tr>	
+	</thead>	
+	<tbody>
+		<?php foreach($charaktere->results as $char): ?>
+			<tr>
+				<td><?php echo $char->id; ?></td>
+				<td><?php echo  HTML::link_to_action('charakter@profil', $char->name, array($char->id)) ; ?></td>
+				<td><?php echo $char->rang->name; ?></td>
+				<td><?php echo $char->position->name; ?></td>
+				<td><?php echo $char->position->komponente->name; ?></td>
+				<td>
+					<?php if($char->aktiv): ?>
+						<span class="label label-success">Aktiv</span>
+					<?php else: ?>
+						<span class="label label-important">Inaktiv</span>
+					<?php endif; ?>
+					<?php if($char->hauptcharakter): ?> 
+						<i class="icon-ok icon-white"></i> Hauptcharakter
+					<?php endif; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<?php echo  $charaktere->links() ; ?>
+
+
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('template')->with(get_defined_vars())->render(); ?>

@@ -16,8 +16,8 @@
 				{{ HTML::link('/', 'LCARS', array('class' => 'brand')) }}
 				<ul class="nav">
 					@section('topnav')
-					<li>{{ HTML::link('spieler', 'Spieler')}}</li>
-					<li><a href="#">Charaktere</a></li>
+					<li>{{ HTML::link('spieler', 'Spieler') }}</li>
+					<li>{{ HTML::link('charakter', 'Charaktere') }}</li>
 					<li><a href="#">Komponenten</a></li>
 					<li><a href="#">Sternenkarte</a></li>
 					@yield_section

@@ -1,0 +1,8 @@
+
+<?php \Laravel\Section::start('content'); ?>
+	<h1>Error 404</h1>
+
+	<p>Die gewünschte Seite konnte leider nicht gefunden werden. Das tut uns leid.</p>
+	<p><?php echo  HTML::link('/', 'Zurück zur Hauptseite'); ?></p>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('errors')->with(get_defined_vars())->render(); ?>

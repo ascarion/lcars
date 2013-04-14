@@ -1,0 +1,168 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<h1><?php echo  $spieler->name ; ?></h1>
+<section id="ueberblick">
+	<h2>Überblick</h2>
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<td><?php echo  $spieler->id ; ?></td>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<td>
+				<?php echo  $spieler->email ; ?>
+				<?php if($admin): ?>
+					<?php echo  Schnipsel::editbtn('emailbtn') ; ?>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>Status</th>
+			<td>
+				<?php if($spieler->aktiv): ?>
+					<span class="label label-success">Aktiv</span>
+				<?php else: ?>
+					<span class="label label-important">Inaktiv</span>
+				<?php endif; ?>
+				<?php if($admin): ?>
+					<?php echo  Schnipsel::editbtn('aktivbtn') ; ?>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>Pins</th>
+			<td>
+				<?php echo  Schnipsel::pinicon('missionspins', $pins['mp']) ; ?>
+				&nbsp;&nbsp;<?php echo  Schnipsel::pinicon('leiterpins', $pins['lp']) ; ?>
+				&nbsp;&nbsp;<?php echo  Schnipsel::pinicon('gastpins', $pins['gp']) ; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>Erstellt</th>
+			<td><?php echo  Schnipsel::datumsformat($spieler->created_at) ; ?></td>
+		</tr>
+		<tr>
+			<th>Letztes Update</th>
+			<td><?php echo  Schnipsel::datumsformat($spieler->updated_at) ; ?></td>
+		</tr>
+		<tr>
+			<th>Admin</th>
+			<?php if(is_null($spieler->rolle)): ?>
+				<td><span class="label label-important">
+					<i class="icon-ban-circle icon-white"></i></span>
+					<?php if($admin): ?> 
+						<?php echo  Schnipsel::editbtn('adminbtn') ; ?> 
+					<?php endif; ?>
+				</td>
+			<?php else: ?>
+				<td>
+					not done yet.
+					<?php if($admin): ?> 
+						<?php echo  Schnipsel::editbtn('adminbtn') ; ?> 
+					<?php endif; ?>
+				</td>
+			<?php endif; ?>
+		</tr>
+	</table>
+</section>
+
+<section>
+	<h2>Charaktere</h2>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Rang</th>
+				<th>Position</th>
+				<th>Komponente</th>
+				<th colspan="3">Pins</th>
+				<th>Hauptcharakter</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach($charaktere as $charakter): ?> 
+			<tr>
+				<td><?php echo  HTML::link_to_action('charakter@profil', $charakter->name, array($charakter->id)) ; ?></td>
+				<td><?php echo  $charakter->rang->name ; ?></td>
+				<td><?php echo  $charakter->position->name ; ?></td>
+				<td><?php echo  HTML::link_to_action('komponente@profil', $charakter->position->komponente->name, array($charakter->position->komponente->id)) ; ?></td>
+				<td><?php echo  Schnipsel::pinicon('missionspins', $charakter->missionspins) ; ?></td>
+				  <td><?php echo  Schnipsel::pinicon('leiterpins', $charakter->leiterpins) ; ?></td>
+				  <td><?php echo  Schnipsel::pinicon('gastpins', $charakter->gastpins) ; ?></td>
+				<td>
+					<?php if($charakter->hauptcharakter): ?>
+						<i class="icon-ok icon-white" title="Hauptcharakter"></i>
+					<?php else: ?>
+						<?php if($admin): ?>
+							<button class="btn btn-mini" id="hc<?php echo  $charakter->id ; ?>" 
+								title="<?php echo $charakter->name; ?> zum Hauptcharakter machen.">
+								<i class="icon-ok icon-white"></i>
+							</button>
+						<?php endif; ?>
+					<?php endif; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+</section>
+
+<?php if(count($notizen) > 0): ?>
+<section id="notizen">
+<h2>Notizen</h2>
+<div class="tabbable tabs-right">
+	<ul class="nav nav-tabs">
+	<?php foreach($notizen as $name => $notiz): ?>
+		<?php if($name == $charaktere[0]->name): ?>
+		<li class="active"><a href="#<?php echo  Str::slug($name) ; ?>" data-toggle="tab"><?php echo  $name ; ?></a></li>
+		<?php else: ?>
+		<li><a href="#<?php echo  Str::slug($name) ; ?>" data-toggle="tab"><?php echo  $name ; ?></a></li>
+		<?php endif; ?>
+	<?php endforeach; ?>
+	</ul>
+	<div class="tab-content">
+		<?php foreach($notizen as $name => $notiz): ?>
+			<?php if($name == $charaktere[0]->name): ?>
+				<div class="tab-pane active" id="<?php echo  Str::slug($name) ; ?>">
+			<?php else: ?>
+				<div class="tab-pane" id="<?php echo  Str:: slug($name) ; ?>">
+			<?php endif; ?>
+				<?php foreach($notiz as $n) { ?>
+					<div>
+						<div class="well well-small">
+							<?php if($admin): ?>
+								<?php echo  Schnipsel::editbtn('n'.$n->id); ?>
+							<?php endif; ?>
+							<?php echo  Schnipsel::pinlabel('gastpins', $n->gastpins) ; ?>
+							<?php echo  Schnipsel::pinlabel('leiterpins', $n->leiterpins) ; ?>
+							<?php echo  Schnipsel::pinlabel('missionspins', $n->missionspins) ; ?>
+							<div><?php echo  $n->text ; ?></div>
+							<div class="annotation">
+								<?php if($name == 'Eigene Beiträge'): ?> 
+									(<?php echo  $n->charakter->name ; ?>) 
+								<?php endif; ?>
+								<?php echo  HTML::link_to_action('spieler@profil', $n->autor->name, array($n->autor->id)) ; ?> am <?php echo  Schnipsel::datumsformat($n->created_at) ; ?>. 
+								<?php if($n->created_at != $n->updated_at): ?>
+									Zuletzt bearbeitet
+										<?php if($n->autor->id != $n->editierer->id): ?>
+											von <?php echo  HTML::link_to_action('spieler@profil', $n->editierer->name, array($n->editierer->id)) ; ?> 
+										<?php endif; ?>
+									am <?php echo  Schnipsel::datumsformat($n->updated_at) ; ?>.
+								<?php endif; ?>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
+</div>
+</section>
+<?php endif; ?>
+
+
+<?php \Laravel\Section::stop(); ?>
+
+<?php echo view('template')->with(get_defined_vars())->render(); ?>

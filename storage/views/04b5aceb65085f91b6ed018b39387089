@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+	<meta charset="utf-8">
+	<title>LCARS - <?php echo  $title ; ?></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<?php echo  Asset::styles(); ; ?>
+	<?php echo  Asset::container('bootstrap')->styles(); ; ?>
+	<?php echo \Laravel\Section::yield('styles'); ?>
+</head>
+<body>
+<div id="wrap">
+	<div class="navbar navbar-static-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<?php echo  HTML::link('/', 'LCARS', array('class' => 'brand')) ; ?>
+				<ul class="nav">
+					<?php \Laravel\Section::start('topnav'); ?>
+					<li><?php echo  HTML::link('spieler', 'Spieler') ; ?></li>
+					<li><?php echo  HTML::link('charakter', 'Charaktere') ; ?></li>
+					<li><a href="#">Komponenten</a></li>
+					<li><a href="#">Sternenkarte</a></li>
+					<?php echo \Laravel\Section::yield_section(); ?>
+				</ul>
+				<ul class="nav pull-right">
+						<li><a href="http://stardate.trekzone.de"><i class="icon-star icon-white"></i> <?php echo  Datum::createFromTimestamp()->toInplay()->toSternzeit()->getSternzeit() ; ?></a></li>
+					<?php if(!is_null(Auth::user())): ?>
+						<li class="dropdown">
+							<a class="dropdown-toggle" data-toggle="dropdown" href="#"><?php echo  Auth::user()->name ; ?> <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<?php echo \Laravel\Section::yield('topnav_user'); ?>
+								<li><?php echo  HTML::link_to_action('spieler@profil', 'Spielerprofil', array(Auth::user()->id)) ; ?></li>
+								<li><a href="#">Passwort &amp; Email ändern</a></li>
+								<li class="divider"></li>
+								<li><?php echo  HTML::link_to_route('logout', 'Abmelden') ; ?></li>
+							</ul>
+						</li>	
+					<?php else: ?>
+						<li><?php echo  HTML::link_to_route('login', 'Login') ; ?></li>	
+					<?php endif; ?>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="container" id="content">
+		<?php echo \Laravel\Section::yield('content'); ?>
+	</div>
+	<div id="push"></div>
+</div>
+	<footer id="footer">
+		<div class="container">
+			<hr>
+			<p class="muted">&copy; 2013 - Trekzone Network Rollenspiel</p>
+		</div>
+	</footer>
+	<?php echo  Asset::scripts(); ; ?>
+	<?php echo  Asset::container('bootstrap')->scripts(); ; ?>
+	<?php echo \Laravel\Section::yield('scripts'); ?>
+</body>
+</html>

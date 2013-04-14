@@ -7,6 +7,7 @@
 
 class Missionseintrag extends Eloquent {
 	public static $table = "missionseintraege";
+	public $includes = array('mission');
 
 	public function mission() {
 		return $this->belongs_to('Mission', 'missionen_id');

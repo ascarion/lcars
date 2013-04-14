@@ -9,7 +9,7 @@ class Mission extends Eloquent {
 	public static $table = "missionen";
 
 	public function komponente() {
-		return $this->belongs_to('Komponente', 'komponente_id');
+		return $this->belongs_to('Komponente', 'komponenten_id');
 	}
 
 	public function eintrag() {

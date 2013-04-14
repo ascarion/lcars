@@ -36,12 +36,12 @@ class Spieler_Controller extends Base_Controller {
 			->or_where('aendernde_id', '=', $spieler->id)->order_by('updated_at', 'desc')->get();
 
 		return View::make('spieler.profil')
-			->with('title', "Profil - " . $spieler->name)
+			->with('title', "Spieler - " . $spieler->name)
 			->with('spieler', $spieler)
 			->with('charaktere', $charaktere)
 			->with('notizen', $notizen)
 			->with('pins', $pins)
-			->with('admin', false);
+			->with('admin', true);
 	}
 
 	public function action_liste() {
@@ -50,7 +50,7 @@ class Spieler_Controller extends Base_Controller {
 		return View::make('spieler.liste')
 			->with('spieler', $spieler)
 			->with('no', $no)
-			->with('title', 'Spieler - Liste');
+			->with('title', 'Spielerliste');
 
 	}
 }

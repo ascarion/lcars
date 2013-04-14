@@ -88,7 +88,7 @@
 				<td>{{ HTML::link_to_action('charakter@profil', $charakter->name, array($charakter->id)) }}</td>
 				<td>{{ $charakter->rang->name }}</td>
 				<td>{{ $charakter->position->name }}</td>
-				<td>{{ $charakter->position->komponente->name }}</td>
+				<td>{{ HTML::link_to_action('komponente@profil', $charakter->position->komponente->name, array($charakter->position->komponente->id)) }}</td>
 				<td>{{ Schnipsel::pinicon('missionspins', $charakter->missionspins) }}</td>
 				  <td>{{ Schnipsel::pinicon('leiterpins', $charakter->leiterpins) }}</td>
 				  <td>{{ Schnipsel::pinicon('gastpins', $charakter->gastpins) }}</td>
@@ -110,6 +110,7 @@
 	</table>
 </section>
 
+@if(count($notizen) > 0)
 <section id="notizen">
 <h2>Notizen</h2>
 <div class="tabbable tabs-right">
@@ -160,6 +161,7 @@
 	</div>
 </div>
 </section>
+@endif
 
 
 @endsection

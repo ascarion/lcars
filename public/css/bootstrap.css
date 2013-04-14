@@ -6979,3 +6979,17 @@ label {
 .affix {
   position: fixed;
 }
+
+
+/** Eigene Modifikationen **/
+
+body {
+  background-color: #171417;
+  background-image: url("../img/rauschbg.png");
+  /*background-image: url("../img/sebg.png");*/
+  /*background-image: url("../img/broken_noise.png");*/
+}
+
+.navbar .navbar-inner {
+  background-image: url("../img/sechsecke.png");
+}

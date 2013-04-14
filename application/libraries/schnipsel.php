@@ -46,7 +46,10 @@ class Schnipsel {
 			'</div>';
 	}
 
-	public static function datumsformat($datum) {
+	public static function datumsformat($datum, $format = Null) {
+		if($format != Null) {
+			return Datum::createFromTimestamp(strtotime($datum))->format($format);
+		}
 		return Datum::createFromTimestamp(strtotime($datum));
 	}
 

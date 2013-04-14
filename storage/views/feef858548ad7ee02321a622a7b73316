@@ -1,0 +1,49 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<h1>Spieler</h1>
+
+<p>Die Datenbank enthält <strong><?php echo  $no ; ?></strong> Spieler.</p>
+
+
+<?php echo  $spieler->links() ; ?>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Aktiv</th>
+			<th>Admin</th>
+		</tr>	
+	</thead>	
+	<tbody>
+		<?php foreach($spieler->results as $sp): ?>
+			<tr>
+				<td><?php echo $sp->id; ?></td>
+				<td><?php echo  HTML::link_to_action('spieler@profil', $sp->name, array($sp->id)) ; ?></td>
+				<td><?php echo $sp->email; ?></td>
+				<td>
+					<?php if($sp->aktiv): ?>
+						<span class="label label-success">Aktiv</span>
+					<?php else: ?>
+						<span class="label label-important">Inaktiv</span>
+					<?php endif; ?>
+				</td>
+				<td>
+					<?php if(is_null($sp->rolle)): ?>
+						<span class="label label-important">
+							<i class="icon-ban-circle icon-white"></i></span>
+					<?php else: ?>
+						not done yet.
+					<?php endif; ?>
+			</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<?php echo  $spieler->links() ; ?>
+
+
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('template')->with(get_defined_vars())->render(); ?>

@@ -1,0 +1,7 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<h1>Spieler</h1>
+<p>Diese Seite wird irgendwann irgendwohin weitergeleitet.</p>
+<p>Wir haben <?php echo  $number ; ?> Spieler in der Datenbank!</p>
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('default')->with(get_defined_vars())->render(); ?>;

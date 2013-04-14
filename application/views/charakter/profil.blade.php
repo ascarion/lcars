@@ -27,7 +27,7 @@
 		</tr>
 		<tr>
 			<th>Komponente</th>
-			<td>{{ $charakter->position->komponente->name }} 
+			<td>{{ HTML::link_to_action('komponente@profil', $charakter->position->komponente->name, array($charakter->position->komponente->id)) }} 
 				<span class="annotation">{{ $charakter->position->komponente->typ }}</span></td>
 		</tr>
 		<tr>
@@ -122,6 +122,30 @@
 
 <section id="missionen">
 	<h2>Missionen</h2>
+	<div class="content">
+		<p><strong>{{$mcount[0]}}</strong> anwesend, <strong>{{$mcount[1]}}</strong> entschuldigt, <strong>{{$mcount[2]}}</strong> unentschuldigt.
+				Davon <strong>{{$mcount[3]}}</strong> Spielleitungen, <strong>{{$mcount[4]}}</strong> Gastmissionen.</p>
+		<div class="well well-small"	>
+			<h5>Filter</h5>
+			<form class="form-inline">
+				<label class="checkbox"><input type="checkbox" name="chAnwesend"> Anwesend</label>
+				<label class="checkbox"><input type="checkbox" name="chAnwesend"> Entschuldigt</label>
+				<label class="checkbox"><input type="checkbox" name="chAnwesend"> Unentschuldigt</label>
+				<label class="checkbox"><input type="checkbox" name="chAnwesend"> Spielleiter</label>
+				<label class="checkbox"><input type="checkbox" name="chAnwesend"> Gastmission</label>
+			</form>
+		</div>
+		@foreach($missionen as $me)
+			<p>{{ $me->mission->komponente->name }} - {{ Schnipsel::datumsformat($me->mission->created_at, "d.m.Y") }}
+					@if($me->leiterpins > 0)
+						- <i class="icon-edit icon-white" title="Spielleiter"></i>
+					@endif
+					@if($me->gastpins > 0)
+						- <i class="icon-share icon-white" title="Gastmission"></i>
+					@endif
+			</p>
+		@endforeach
+	</div>
 </section>
 
 <!--

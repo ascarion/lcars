@@ -59,3 +59,30 @@ html, body {
         border-left-width: 0;
     }
 }
+
+#missionenliste {
+	column-count: 2;
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
+}
+
+.mission .icons {
+	float: left;
+	min-width: 40px;
+}
+
+.entschuldigt {
+	color: #666666;
+}
+
+.unentschuldigt {
+	color: #660000;
+}
+
+
+#map { 
+	height: 600px;
+	background: transparent;
+	border: 1px solid white;
+	border-radius: 5px 5px 5px 5px;
+}

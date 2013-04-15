@@ -1,0 +1,17 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<div id="map"></div>
+<?php \Laravel\Section::stop(); ?>
+
+<?php \Laravel\Section::start('topnav'); ?>
+<?php \Laravel\Section::stop(); ?>
+
+<?php \Laravel\Section::start('styles'); ?>
+<?php echo  Asset::container('leaflet')->styles(); ; ?>
+<?php \Laravel\Section::stop(); ?>
+
+<?php \Laravel\Section::start('scripts'); ?>
+<?php echo  Asset::container('leaflet')->scripts(); ; ?>
+<?php \Laravel\Section::stop(); ?>
+
+<?php echo view('template')->with(get_defined_vars())->render(); ?>

@@ -71,8 +71,15 @@ Route::get('/', array('before' => 'auth', function()
 		->with('title', 'Default-Seite');
 }));
 
+Route::any('karte' ,function() {
+	return View::make('karte')
+		->with('title', 'Sternenkarte');
+});
+
+
 Route::controller('spieler');
 Route::controller('charakter');
+Route::controller('sternenkarte');
 
 
 /*
@@ -135,6 +142,12 @@ Route::filter('before', function()
 	Asset::container('bootstrap')->add('css', 'css/bootstrap.css');
 	Asset::container('bootstrap')->add('responsive', 'css/bootstrap-responsive.min.css');
 	Asset::container('bootstrap')->add('js', 'js/bootstrap.js');
+	#Asset::container('leaflet')->add('js', 'js/leaflet.js');
+	Asset::container('leaflet')->add('js', 'http://cdn.leafletjs.com/leaflet-0.5/leaflet.js');
+	#Asset::container('leaflet')->add('css', 'css/leaflet.css');
+	Asset::container('leaflet')->add('css', 'http://cdn.leafletjs.com/leaflet-0.5/leaflet.css');
+	Asset::container('leaflet')->add('own', 'js/karte.js');
+
 
 
 	// Do stuff before every request to your application...

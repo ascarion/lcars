@@ -135,16 +135,48 @@
 				<label class="checkbox"><input type="checkbox" name="chAnwesend"> Gastmission</label>
 			</form>
 		</div>
+		<div id='missionenliste'>
 		@foreach($missionen as $me)
-			<p>{{ $me->mission->komponente->name }} - {{ Schnipsel::datumsformat($me->mission->created_at, "d.m.Y") }}
+			<?php
+				$classes = "mission ";
+				$icons = "";
+				if ($me->anwesenheit == 0) {
+					$classes .= "anwesend ";
+					$icons .= '<i class="icon-check icon-white" title="Anwesend"></i>';
+				}
+				if ($me->anwesenheit == 1) {
+					$classes .= "entschuldigt ";
+					$icons .= '<i class="icon-remove-circle icon-white" title="Entschuldigt abwesend"></i>';
+				}
+				if ($me->anwesenheit == 2) {
+					$classes .= "unentschuldigt ";
+					$icons .= '<i class="icon-ban-circle icon-white" title="Unentschuldigt abwesend"></i>';
+				}
+				if($me->leiterpins > 0) {
+					$classes .= "leiter ";
+					$icons .= '<i class="icon-edit icon-white" title="Spielleiter"></i>';
+				}
+				if ($me->gastpins > 0) {
+					$classes .= "gast ";
+					$icons .= '<i class="icon-share icon-white" title="Gastmission"></i>';
+				}
+			?>
+			<div class="{{$classes}}">
+				<div class="icons">{{ $icons }}</div>
+				{{ $me->mission->komponente->name }} 
+				- {{ Schnipsel::datumsformat($me->mission->created_at, "d.m.Y") }}
+			</div>
+
+			<?php /*<p>{{ $me->mission->komponente->name }} - {{ Schnipsel::datumsformat($me->mission->created_at, "d.m.Y") }}
 					@if($me->leiterpins > 0)
 						- <i class="icon-edit icon-white" title="Spielleiter"></i>
 					@endif
 					@if($me->gastpins > 0)
 						- <i class="icon-share icon-white" title="Gastmission"></i>
 					@endif
-			</p>
+			</p> */ ?>
 		@endforeach
+		</div>
 	</div>
 </section>
 

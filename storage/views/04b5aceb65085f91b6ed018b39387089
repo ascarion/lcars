@@ -53,8 +53,10 @@
 			<p class="muted">&copy; 2013 - Trekzone Network Rollenspiel</p>
 		</div>
 	</footer>
+	<?php echo \Laravel\Section::yield('before_scripts'); ?>
 	<?php echo  Asset::scripts(); ; ?>
 	<?php echo  Asset::container('bootstrap')->scripts(); ; ?>
 	<?php echo \Laravel\Section::yield('scripts'); ?>
+
 </body>
 </html>

@@ -18,7 +18,7 @@
 					@section('topnav')
 					<li>{{ HTML::link('spieler', 'Spieler') }}</li>
 					<li>{{ HTML::link('charakter', 'Charaktere') }}</li>
-					<li><a href="#">Komponenten</a></li>
+					<li>{{ HTML::link('komponente', 'Komponenten') }}</li>
 					<li><a href="#">Sternenkarte</a></li>
 					@yield_section
 				</ul>
@@ -50,7 +50,7 @@
 	<footer id="footer">
 		<div class="container">
 			<hr>
-			<p class="muted">&copy; 2013 - Trekzone Network Rollenspiel</p>
+			<p class="muted">&copy; 2013 &mdash; Trekzone Network Rollenspiel</p>
 		</div>
 	</footer>
 	@yield('before_scripts')

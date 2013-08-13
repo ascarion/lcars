@@ -1,0 +1,41 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<h1>Komponenten</h1>
+
+<p>Die Datenbank enthält <strong><?php echo  $no ; ?></strong> Komponenten.</p>
+
+
+<?php echo  $komponenten->links() ; ?>
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Typ</th>
+			<th>Aktiv</th>
+		</tr>	
+	</thead>	
+	<tbody>
+		<?php foreach($komponenten->results as $kp): ?>
+			<tr>
+				<td><?php echo $kp->id; ?></td>
+				<td><?php echo  HTML::link_to_action('komponente@profil', $kp->name, array($kp->id)) ; ?></td>
+				<td><?php echo $kp->typ; ?></td>
+				<td>
+					<?php if($kp->aktiv): ?>
+						<span class="label label-success">Aktiv</span>
+					<?php else: ?>
+						<span class="label label-important">Inaktiv</span>
+					<?php endif; ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
+	</tbody>
+</table>
+
+<?php echo  $komponenten->links() ; ?>
+
+
+<?php \Laravel\Section::stop(); ?>
+<?php echo view('template')->with(get_defined_vars())->render(); ?>

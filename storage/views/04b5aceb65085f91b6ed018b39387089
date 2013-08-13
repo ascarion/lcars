@@ -18,7 +18,7 @@
 					<?php \Laravel\Section::start('topnav'); ?>
 					<li><?php echo  HTML::link('spieler', 'Spieler') ; ?></li>
 					<li><?php echo  HTML::link('charakter', 'Charaktere') ; ?></li>
-					<li><a href="#">Komponenten</a></li>
+					<li><?php echo  HTML::link('komponente', 'Komponenten') ; ?></li>
 					<li><a href="#">Sternenkarte</a></li>
 					<?php echo \Laravel\Section::yield_section(); ?>
 				</ul>
@@ -50,7 +50,7 @@
 	<footer id="footer">
 		<div class="container">
 			<hr>
-			<p class="muted">&copy; 2013 - Trekzone Network Rollenspiel</p>
+			<p class="muted">&copy; 2013 &mdash; Trekzone Network Rollenspiel</p>
 		</div>
 	</footer>
 	<?php echo \Laravel\Section::yield('before_scripts'); ?>

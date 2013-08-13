@@ -8,11 +8,11 @@
 class Komponente extends Eloquent {
 	public static $table = "komponenten";
 
-	public function position() {
+	public function positionen() {
 		return $this->has_many('Position', 'komponenten_id');
 	}
 
-	public function mission() {
+	public function missionen() {
 		return $this->has_many('Mission', 'komponenten_id');
 	}
 }

@@ -105,17 +105,22 @@
 				</td>
 			</tr>
 		<?php endforeach; ?>
+			<tr>
+				<td><button id="newchar" class="btn">Neuer Charakter</button></td>
+				<td colspan="7"></td>
+			</tr>
 		</tbody>
 	</table>
+	
 </section>
 
 <?php if(count($notizen) > 0): ?>
 <section id="notizen">
-<h2>Notizen</h2>
+<h2>Letzte Aktivitäten</h2>
 <div class="tabbable tabs-right">
 	<ul class="nav nav-tabs">
 	<?php foreach($notizen as $name => $notiz): ?>
-		<?php if($name == $charaktere[0]->name): ?>
+		<?php if(count($charaktere) > 0 && $name == $charaktere[0]->name): ?>
 		<li class="active"><a href="#<?php echo  Str::slug($name) ; ?>" data-toggle="tab"><?php echo  $name ; ?></a></li>
 		<?php else: ?>
 		<li><a href="#<?php echo  Str::slug($name) ; ?>" data-toggle="tab"><?php echo  $name ; ?></a></li>
@@ -124,7 +129,7 @@
 	</ul>
 	<div class="tab-content">
 		<?php foreach($notizen as $name => $notiz): ?>
-			<?php if($name == $charaktere[0]->name): ?>
+			<?php if(count($charaktere) > 0 && $name == $charaktere[0]->name): ?>
 				<div class="tab-pane active" id="<?php echo  Str::slug($name) ; ?>">
 			<?php else: ?>
 				<div class="tab-pane" id="<?php echo  Str:: slug($name) ; ?>">
@@ -141,7 +146,7 @@
 							<div><?php echo  $n->text ; ?></div>
 							<div class="annotation">
 								<?php if($name == 'Eigene Beiträge'): ?> 
-									(<?php echo  $n->charakter->name ; ?>) 
+									(<?php echo  HTML::link_to_action('charakter@profil', $n->charakter->name, array($n->charakter->id)) ; ?>) 
 								<?php endif; ?>
 								<?php echo  HTML::link_to_action('spieler@profil', $n->autor->name, array($n->autor->id)) ; ?> am <?php echo  Schnipsel::datumsformat($n->created_at) ; ?>. 
 								<?php if($n->created_at != $n->updated_at): ?>

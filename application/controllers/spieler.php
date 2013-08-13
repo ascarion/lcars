@@ -6,6 +6,20 @@ class Spieler_Controller extends Base_Controller {
 		return Redirect::to_action('spieler@liste');
 	}
 
+
+	public function action_json($opt) {
+		$r = Rang::get();
+		$raenge = array();
+		foreach ($r as $rang)
+			$raenge[] = $rang->to_array();
+		return Response::json($raenge);
+	}
+
+	public function action_neu() {
+		return View::make('spieler.neu')
+			->with('title', 'Spieler Hinzufügen');
+	}
+
 	public function action_profil($id) {
 		$spieler = Spieler::find($id);
 		
@@ -25,7 +39,7 @@ class Spieler_Controller extends Base_Controller {
 		$pins['mp'] = $pins['lp'] = $pins['gp'] = 0;
 
 		foreach ($charaktere as $charakter) {
-			$notizen[$charakter->name] = $charakter->notizen()->order_by('updated_at', 'desc')->get();
+			$notizen[$charakter->name] = $charakter->notizen()->order_by('updated_at', 'desc')->with(array('editierer', 'autor'))->get();
 			$pins['mp'] += $charakter->missionspins;
 			$pins['lp'] += $charakter->leiterpins;
 			$pins['gp'] += $charakter->gastpins;
@@ -41,7 +55,7 @@ class Spieler_Controller extends Base_Controller {
 			->with('charaktere', $charaktere)
 			->with('notizen', $notizen)
 			->with('pins', $pins)
-			->with('admin', true);
+			->with('admin', Auth::user()->admin);
 	}
 
 	public function action_liste() {
@@ -51,6 +65,33 @@ class Spieler_Controller extends Base_Controller {
 			->with('spieler', $spieler)
 			->with('no', $no)
 			->with('title', 'Spielerliste');
+	}
 
+	public function action_neu2() {
+		$input = Input::all();
+
+		$rules = array(
+			'name' => 'required|max:255',
+			'email' => 'required|email|unique:spieler|max:255');
+
+		$validation = Validator::make($input, $rules);
+
+		if($validation->fails()) {
+			return Redirect::to_action('spieler@liste')->with_errors($validation);
+		}
+
+		$name = Input::get('name');
+		$email = Input::get('email');
+
+
+		$spieler = new Spieler;
+		$spieler->name = $name;
+		$spieler->email = $email;
+		$spieler->aktiv = true;
+		$spieler->save();
+
+		return Redirect::to_action('spieler@profil', array($spieler->id) );
 	}
 }
+
+/** --- EOF --- **/

@@ -79,6 +79,7 @@ Route::any('karte' ,function() {
 
 Route::controller('spieler');
 Route::controller('charakter');
+Route::controller('komponente');
 Route::controller('sternenkarte');
 
 
@@ -147,6 +148,7 @@ Route::filter('before', function()
 	#Asset::container('leaflet')->add('css', 'css/leaflet.css');
 	Asset::container('leaflet')->add('css', 'http://cdn.leafletjs.com/leaflet-0.5/leaflet.css');
 	Asset::container('leaflet')->add('own', 'js/karte.js');
+	Asset::container('neu')->add('own', 'js/neu.js');
 
 
 

@@ -1,0 +1,83 @@
+
+<?php \Laravel\Section::start('content'); ?>
+<h1><?php echo  $komponente->name ; ?></h1>
+<section id="ueberblick">
+	<h2>Überblick</h2>
+	<table class="table">
+		<tr>
+			<th>ID</th>
+			<td><?php echo  $komponente->id ; ?></td>
+		</tr>
+		<tr>
+			<th>Typ</th>
+			<td>
+				<?php echo  $komponente->typ ; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>Status</th>
+			<td>
+				<?php if($komponente->aktiv): ?>
+					<span class="label label-success">Aktiv</span>
+				<?php else: ?>
+					<span class="label label-important">Inaktiv</span>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>Pins per Mission</th>
+			<td>
+					<?php echo  Schnipsel::pinicon('missionspins', $komponente->missionspins) ; ?>
+					<?php echo  Schnipsel::pinicon('leiterpins', $komponente->leiterpins) ; ?>
+					<?php echo  Schnipsel::pinicon('gastpins', $komponente->gastpins) ; ?>
+			</td>
+		</tr>
+		<tr>
+			<th>Erstellt</th>
+			<td><?php echo  Schnipsel::datumsformat($komponente->created_at) ; ?></td>
+		</tr>
+		<tr>
+			<th>Letztes Update</th>
+			<td><?php echo  Schnipsel::datumsformat($komponente->updated_at) ; ?></td>
+		</tr>
+	</table>
+</section>
+
+<section>
+	<h2>Charaktere</h2>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Rang</th>
+				<th>Position</th>
+				<th colspan="3">Pins</th>
+			</tr>
+		</thead>
+		<tbody>
+		<?php foreach($charaktere as $charakter): ?> 
+			<tr>
+				<td><?php echo  HTML::link_to_action('charakter@profil', $charakter->name, array($charakter->id)) ; ?></td>
+				<td><?php echo  $charakter->rang->name ; ?></td>
+				<td><?php echo  $charakter->position->name ; ?></td>
+				<td><?php echo  Schnipsel::pinicon('missionspins', $charakter->missionspins) ; ?></td>
+				  <td><?php echo  Schnipsel::pinicon('leiterpins', $charakter->leiterpins) ; ?></td>
+				  <td><?php echo  Schnipsel::pinicon('gastpins', $charakter->gastpins) ; ?></td>
+			</tr>
+		<?php endforeach; ?>
+		</tbody>
+	</table>
+</section>
+
+<section id="missionen">
+	<h2>Missionen</h2>
+	<div id="missionenliste">
+		<?php foreach($missionen as $mission): ?>
+		<div><?php echo  HTML::link_to_action('ajax@mission', Schnipsel::datumsformat($mission->created_at, "d.m.Y"), array($mission->id)) ; ?></div>
+		<?php endforeach; ?>
+	</div>
+</section>
+<?php \Laravel\Section::stop(); ?>
+
+<?php echo view('template')->with(get_defined_vars())->render(); ?>

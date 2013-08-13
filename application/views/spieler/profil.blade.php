@@ -106,17 +106,22 @@
 				</td>
 			</tr>
 		@endforeach
+			<tr>
+				<td><button id="newchar" class="btn">Neuer Charakter</button></td>
+				<td colspan="7"></td>
+			</tr>
 		</tbody>
 	</table>
+	
 </section>
 
 @if(count($notizen) > 0)
 <section id="notizen">
-<h2>Notizen</h2>
+<h2>Letzte Aktivitäten</h2>
 <div class="tabbable tabs-right">
 	<ul class="nav nav-tabs">
 	@foreach($notizen as $name => $notiz)
-		@if($name == $charaktere[0]->name)
+		@if(count($charaktere) > 0 && $name == $charaktere[0]->name)
 		<li class="active"><a href="#{{ Str::slug($name) }}" data-toggle="tab">{{ $name }}</a></li>
 		@else
 		<li><a href="#{{ Str::slug($name) }}" data-toggle="tab">{{ $name }}</a></li>
@@ -125,7 +130,7 @@
 	</ul>
 	<div class="tab-content">
 		@foreach($notizen as $name => $notiz)
-			@if($name == $charaktere[0]->name)
+			@if(count($charaktere) > 0 && $name == $charaktere[0]->name)
 				<div class="tab-pane active" id="{{ Str::slug($name) }}">
 			@else
 				<div class="tab-pane" id="{{ Str:: slug($name) }}">
@@ -142,7 +147,7 @@
 							<div>{{ $n->text }}</div>
 							<div class="annotation">
 								@if($name == 'Eigene Beiträge') 
-									({{ $n->charakter->name }}) 
+									({{ HTML::link_to_action('charakter@profil', $n->charakter->name, array($n->charakter->id)) }}) 
 								@endif
 								{{ HTML::link_to_action('spieler@profil', $n->autor->name, array($n->autor->id)) }} am {{ Schnipsel::datumsformat($n->created_at) }}. 
 								@if($n->created_at != $n->updated_at)

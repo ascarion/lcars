@@ -45,5 +45,29 @@
 
 {{ $spieler->links() }}
 
+<!--@if(Auth::user()->admin)-->
+<div id="addform">
+	<?php $msgs = $errors->all() ?>
+	@foreach($msgs as $e)
+		<div class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<strong>Fehler!</strong>	{{$e}}
+		</div>
+	@endforeach
+	{{Form::open('spieler/neu', 'POST', array('class' => 'form-inline'))}}
+	<fieldset>
+		<div class="input-prepend">
+			<span class="add-on"><i class="icon-user"></i></span>
+			<input type="text" name="name" placeholder="Vor- und Nachname">
+		</div>
+		<div class="input-prepend">
+			<span class="add-on">@</span>
+			<input type="email" name="email" placeholder="Email">
+		</div>
+		<input type="submit" class="btn btn-primary" value="Spieler hinzufügen">
+	</fieldset>
+	{{Form::close()}}
+</div>
+<!--@endif-->
 
 @endsection
